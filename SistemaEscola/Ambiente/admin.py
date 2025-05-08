@@ -1,6 +1,16 @@
 from django.contrib import admin
-from .models import Ambiente
+from .models import Ambiente, Professor, Disciplinar
 
 # Register your models here.
 
-admin.site.register(Ambiente)
+@admin.register(Professor)
+class AdminProfessor(admin.ModelAdmin):
+    list_display = ['ni', 'nome', 'email', 'telefone']
+
+@admin.register(Disciplinar)
+class AdminDisciplinar(admin.ModelAdmin):
+    list_display = ['nome', 'curso', 'carga_horaria', 'descricao', 'professor']
+
+@admin.register(Ambiente)
+class AdminAmbiente(admin.ModelAdmin):
+    list_display = ['data_inicio', 'data_termino', 'periodo', 'sala', 'professor', 'disciplina']
