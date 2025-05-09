@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -31,7 +32,7 @@ class Disciplinar(models.Model):
     nome = models.CharField(max_length= 255, blank=True, null=True)
     curso = models.CharField(max_length= 3, choices=CURSO, blank=True, null=True)
     carga_horaria = models.TimeField(blank=True, null=True)
-    descricao = models.CharField(max_length= 255)
+    descricao = models.CharField(max_length= 255, blank=True, null=True)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE, related_name='disciplinas')
 
     def __str__(self):
@@ -47,10 +48,10 @@ PERIODO = [
 ]
 
 class Ambiente(models.Model):
-    data_inicio = models.DateTimeField()
-    data_termino = models.DateTimeField()
-    periodo = models.CharField(max_length=5, choices=PERIODO)
-    sala = models.CharField(max_length=255)
+    data_inicio = models.DateTimeField(blank=True, null=True)
+    data_termino = models.DateTimeField(blank=True, null=True)
+    periodo = models.CharField(max_length=5, choices=PERIODO, blank=True, null=True)
+    sala = models.CharField(max_length=255, blank=True, null=True)
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     disciplina = models.ForeignKey(Disciplinar, on_delete=models.CASCADE)
 
@@ -59,3 +60,16 @@ class Ambiente(models.Model):
     
     class Meta:
         verbose_name = 'Ambiente'
+
+SISTEMAS = [
+    ('P', 'Professores'),
+    ('D', 'Disciplinas'),
+    ('A', 'Ambientes')
+]
+
+class Gestor(AbstractUser):
+    sistema = models.CharField(max_length=1, choices=SISTEMAS, blank=True, null=True)
+    nome = models.CharField(max_length=255, blank=True, null=True)
+    idade = models.PositiveIntegerField(blank=True, null=True)
+    foto = models.ImageField(upload_to='images/', blank=True, null= True)
+

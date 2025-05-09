@@ -49,15 +49,21 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(hours= 1)
 }
 
+AUTH_USER_MODEL = 'Ambiente.Gestor'
 
 
-#REST_FRAMEWORK = {
-#    'DEFAULT_AUTHENTICATION_CLASSES':
-#        'rest_framework_simplejwt.authentication.JWTAuthentication',
-#    'DEFAULT_PAGINATION_CLASSES':
-#        'rest_framework.pagination.PageNumberPagination',
-#    'PAGE_SIZE': 5
-#}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5
+}
 
 
 MIDDLEWARE = [
@@ -104,6 +110,7 @@ DATABASES = {
         'PORT': '3306'
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -1,5 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Ambiente, Professor, Disciplinar
 
 class ProfessorSerializer(serializers.ModelSerializer):
@@ -16,3 +17,4 @@ class AmbienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ambiente
         fields = '__all__'
+
