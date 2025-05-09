@@ -26,20 +26,19 @@ def OverviewAPI(request):
     }
     return Response(api_urls)
 
-class Professor(ListAPIView):
+class ProfessorListView(ListAPIView):
     queryset = Professor.objects.all()
     serializer_class = ProfessorSerializer
     pagination_class = MyPageNumberPaginationProfessor
 
-class Disciplina(ListAPIView):
+class DisciplinaListView(ListAPIView):
     queryset = Disciplinar.objects.all()
     serializer_class = DisciplinaSerializer
     pagination_class = MyPageNumberPaginationDisciplinar
 
-class Ambiente(ListAPIView):
+class AmbienteListView(ListAPIView):
     queryset = Ambiente.objects.all()
     serializer_class = AmbienteSerializer
     pagination_class = MyPageNumberPaginationAmbiente
 
-class ListView()
 
